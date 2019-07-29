@@ -1,11 +1,14 @@
 <html>
   <head>
     <style>
+      h1 {
+        font-family: Helvetica, sans-serif;
+      }
     </style>
   </head>
   <body>
     <h1>ACME Grid Maker</h1>
-    <form id='gridMaker'>
+    <form id='gridForm'>
       <input name='columns' placeholder='columns'/>
       <br><br>
       <input name='rows' placeholder='rows'/>
@@ -18,7 +21,13 @@
     </div>
 
     <script>
+      const columns = document.querySelector('[name="columns"]');
+      const rows = document.querySelector('[name="rows"]');
+      const gridForm = document.querySelector('#gridForm');
 
+      gridForm.addEventListener('submit', ev => {
+        ev.preventDefault();
+      })
 
     </script>
   </body>
