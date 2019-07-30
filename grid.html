@@ -9,8 +9,8 @@
         display: flex;
       }
       .cell {
-        width: 3rem;
-        height: 3rem;
+        width: 1rem;
+        height: 1rem;
         border: solid 1px black;
         display: flex;
         justify-content: center;
@@ -70,34 +70,26 @@
       const gridContainer = document.querySelector('#gridContainer');
 
       gridContainer.addEventListener('click', ev => {
-
         const cell = ev.target;
-        const row = ev.target.parentNode;
-        console.log('row', row);
+        const row = cell.parentNode;
         const cdx = [...row.children].indexOf(cell);
         const rdx = [...row.parentNode.children].indexOf(row);
-
-        //render();
       });
 
       const render = () => {
         const numCols = Number(columnInput.value); // coerce string into number
         const numRows = Number(rowInput.value);
         const grid = generateGrid(numRows, numCols); //stores correct size grid based on user inputs
-        console.log('grid', grid);
         const html = generateHTML(grid);
         gridContainer.innerHTML = html;
 
-
+        // find the index of each cell, and display on click
         gridContainer.addEventListener('click', ev => {
 
           const cell = ev.target;
           const row = ev.target.parentNode; // different than lecture ev.parentNode
-          console.log('row', row);
           const cdx = [...row.children].indexOf(cell);
           const rdx = [...row.parentNode.children].indexOf(row);
-          console.log('click rdx', rdx);
-          console.log('click cdx', cdx);
           const idxHTML = `rIdx: ${rdx} cIdx: ${cdx}`;
           indexDisplay.innerHTML = idxHTML;
         });
