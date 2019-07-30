@@ -39,6 +39,7 @@
       const columnInput = document.querySelector('[name="columns"]');
       const rowInput = document.querySelector('[name="rows"]');
       const gridForm = document.querySelector('#gridForm');
+      const gridContainer = document.querySelector('#gridContainer');
       const indexDisplay = document.querySelector('#indexDisplay');
 
       //generate a grid, aka array of arrays
@@ -67,13 +68,14 @@
         render();
       });
 
-      const gridContainer = document.querySelector('#gridContainer');
-
       gridContainer.addEventListener('click', ev => {
         const cell = ev.target;
         const row = cell.parentNode;
         const cdx = [...row.children].indexOf(cell);
         const rdx = [...row.parentNode.children].indexOf(row);
+        const idxHTML = `rIdx: ${rdx} cIdx: ${cdx}`;
+          indexDisplay.innerHTML = idxHTML;
+          render();
       });
 
       const render = () => {
@@ -82,17 +84,6 @@
         const grid = generateGrid(numRows, numCols); //stores correct size grid based on user inputs
         const html = generateHTML(grid);
         gridContainer.innerHTML = html;
-
-        // find the index of each cell, and display on click
-        gridContainer.addEventListener('click', ev => {
-
-          const cell = ev.target;
-          const row = ev.target.parentNode; // different than lecture ev.parentNode
-          const cdx = [...row.children].indexOf(cell);
-          const rdx = [...row.parentNode.children].indexOf(row);
-          const idxHTML = `rIdx: ${rdx} cIdx: ${cdx}`;
-          indexDisplay.innerHTML = idxHTML;
-        });
       };
       render();
     </script>
