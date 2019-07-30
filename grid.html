@@ -38,6 +38,19 @@
       const rowInput = document.querySelector('[name="rows"]');
       const gridForm = document.querySelector('#gridForm');
 
+      //generate a grid filled with zeros
+      const generateGrid = (_numRows, _numCols) => {
+        const rows = [];
+        for (let i = 0; i < _numRows; i++) {
+          const row = [];
+          rows.push(row)
+          for (let j = 0; j < _numCols; j++) {
+            row.push(0);
+          }
+        }
+        return rows;
+      }
+
       gridForm.addEventListener('submit', ev => {
         ev.preventDefault();
         render();
@@ -45,9 +58,10 @@
 
       const render = () => {
         // generate our html
-        let numCols = Number(columnInput.value); // need to coerce string into number
-        let numRows = Number(rowInput.value);
-        console.log(numCols+numRows);
+        const numCols = Number(columnInput.value); // need to coerce string into number
+        const numRows = Number(rowInput.value);
+        const data = generateGrid(numRows, numCols);
+        //console.log('data', data);
 
       }
       render();
