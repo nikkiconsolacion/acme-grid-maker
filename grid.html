@@ -66,16 +66,23 @@
         `).join('');
       };
 
-      //disable button if row or col input > 50
-      gridButton.addEventListener('keyup', ev => {
-        const Cols = (columnInput.value)*1;
+      //disable button if row input > 50
+      rowInput.addEventListener('keyup', ev => {
         const Rows = (rowInput.value)*1;
-        if (Cols || Rows > 50) {
+        if (Rows > 50) {
           gridButton.setAttribute("disabled", "disabled");
         } else {
           gridButton.removeAttribute("disabled");
         }
-        render();
+      });
+      //disable button if column input > 50
+      columnInput.addEventListener('keyup', ev => {
+        const Cols = (columnInput.value)*1;
+        if (Cols > 50) {
+          gridButton.setAttribute("disabled", "disabled");
+        } else {
+          gridButton.removeAttribute("disabled");
+        }
       });
 
       gridForm.addEventListener('submit', ev => {
