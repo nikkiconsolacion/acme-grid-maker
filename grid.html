@@ -26,7 +26,7 @@
       <br><br>
       <input name='rows' placeholder='rows'/>
       <br><br>
-      <button>Make Grid</button>
+      <button id ='gridButton'>Make Grid</button>
     </form>
 
     <div id='gridContainer'>
@@ -39,8 +39,10 @@
       const columnInput = document.querySelector('[name="columns"]');
       const rowInput = document.querySelector('[name="rows"]');
       const gridForm = document.querySelector('#gridForm');
+      const gridButton = document.querySelector('#gridButton');
       const gridContainer = document.querySelector('#gridContainer');
       const indexDisplay = document.querySelector('#indexDisplay');
+
 
       //generate a grid, aka array of arrays
       const generateGrid = (_numRows, _numCols) => {
@@ -55,6 +57,7 @@
         return grid;
       };
 
+      //generate html to populate gridContainer
       const generateHTML = (_grid) => {
         return _grid.map( row => `
         <div class='row'>
@@ -62,6 +65,18 @@
         </div>
         `).join('');
       };
+
+      //disable button if row or col input > 50
+      gridButton.addEventListener('keyup', ev => {
+        const Cols = (columnInput.value)*1;
+        const Rows = (rowInput.value)*1;
+        if (Cols || Rows > 50) {
+          gridButton.setAttribute("disabled", "disabled");
+        } else {
+          gridButton.removeAttribute("disabled");
+        }
+        render();
+      });
 
       gridForm.addEventListener('submit', ev => {
         ev.preventDefault();
@@ -79,10 +94,11 @@
       });
 
       const render = () => {
-        const numCols = Number(columnInput.value); // coerce string into number
-        const numRows = Number(rowInput.value);
+        const numCols = (columnInput.value)*1; // coerce string into number
+        const numRows = (rowInput.value)*1;
         const grid = generateGrid(numRows, numCols); //stores correct size grid based on user inputs
         const html = generateHTML(grid);
+        // populate gridContainer with generated html
         gridContainer.innerHTML = html;
       };
       render();
