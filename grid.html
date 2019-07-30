@@ -33,20 +33,22 @@
       <!-- create grid here -->
 
     </div>
+    <div id='indexDisplay'></div>
 
     <script>
       const columnInput = document.querySelector('[name="columns"]');
       const rowInput = document.querySelector('[name="rows"]');
       const gridForm = document.querySelector('#gridForm');
+      const indexDisplay = document.querySelector('#indexDisplay');
 
-      //generate a grid filled with zeros
+      //generate a grid, aka array of arrays
       const generateGrid = (_numRows, _numCols) => {
         const grid = [];
         for (let i = 0; i < _numRows; i++) {
           const row = [];
           grid.push(row);
           for (let j = 0; j < _numCols; j++) {
-            row.push(0);
+            row.push(''); // creates an empty cell
           }
         }
         return grid;
@@ -72,10 +74,10 @@
         const cell = ev.target;
         const row = ev.target.parentNode;
         console.log('row', row);
-        //const cdx = [...row.children].indexOf(cell);
-        //const rdx = [...row.parentNode.children].indexOf(row);
-        console.log('click');
-        render();
+        const cdx = [...row.children].indexOf(cell);
+        const rdx = [...row.parentNode.children].indexOf(row);
+
+        //render();
       });
 
       const render = () => {
@@ -85,6 +87,20 @@
         console.log('grid', grid);
         const html = generateHTML(grid);
         gridContainer.innerHTML = html;
+
+
+        gridContainer.addEventListener('click', ev => {
+
+          const cell = ev.target;
+          const row = ev.target.parentNode; // different than lecture ev.parentNode
+          console.log('row', row);
+          const cdx = [...row.children].indexOf(cell);
+          const rdx = [...row.parentNode.children].indexOf(row);
+          console.log('click rdx', rdx);
+          console.log('click cdx', cdx);
+          const idxHTML = `rIdx: ${rdx} cIdx: ${cdx}`;
+          indexDisplay.innerHTML = idxHTML;
+        });
       };
       render();
     </script>
