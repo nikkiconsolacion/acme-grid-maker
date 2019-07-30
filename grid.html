@@ -67,6 +67,17 @@
 
       const gridContainer = document.querySelector('#gridContainer');
 
+      gridContainer.addEventListener('click', ev => {
+
+        const cell = ev.target;
+        const row = ev.target.parentNode;
+        console.log('row', row);
+        //const cdx = [...row.children].indexOf(cell);
+        //const rdx = [...row.parentNode.children].indexOf(row);
+        console.log('click');
+        render();
+      });
+
       const render = () => {
         const numCols = Number(columnInput.value); // coerce string into number
         const numRows = Number(rowInput.value);
