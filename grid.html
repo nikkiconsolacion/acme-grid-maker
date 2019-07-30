@@ -3,7 +3,19 @@
     <style>
       h1 {
         font-family: Helvetica, sans-serif;
+
       }
+      div > div {
+
+        height: 15px;
+        border: solid 1px black;
+      }
+      div > span {
+        background-color: red;
+        height: 15px;
+        width: 15px;
+      }
+
     </style>
   </head>
   <body>
@@ -18,17 +30,27 @@
 
     <div id='gridContainer'>
       <!-- create grid here -->
+
     </div>
 
     <script>
-      const columns = document.querySelector('[name="columns"]');
-      const rows = document.querySelector('[name="rows"]');
+      const columnInput = document.querySelector('[name="columns"]');
+      const rowInput = document.querySelector('[name="rows"]');
       const gridForm = document.querySelector('#gridForm');
 
       gridForm.addEventListener('submit', ev => {
         ev.preventDefault();
-      })
+        render();
+      });
 
+      const render = () => {
+        // generate our html
+        let numCols = Number(columnInput.value); // need to coerce string into number
+        let numRows = Number(rowInput.value);
+        console.log(numCols+numRows);
+
+      }
+      render();
     </script>
   </body>
 </html>
