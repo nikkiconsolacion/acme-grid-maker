@@ -69,7 +69,8 @@
       //disable button if row input > 50
       rowInput.addEventListener('keyup', ev => {
         const Rows = (rowInput.value)*1;
-        if (Rows > 50) {
+        if (Rows > 50 ||isNaN(Rows)) {
+          //isNaN() built in method checks if a value is a number
           gridButton.setAttribute("disabled", "disabled");
         } else {
           gridButton.removeAttribute("disabled");
@@ -78,7 +79,7 @@
       //disable button if column input > 50
       columnInput.addEventListener('keyup', ev => {
         const Cols = (columnInput.value)*1;
-        if (Cols > 50) {
+        if (Cols > 50 || isNaN(Cols)) {
           gridButton.setAttribute("disabled", "disabled");
         } else {
           gridButton.removeAttribute("disabled");
